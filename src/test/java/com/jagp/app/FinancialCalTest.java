@@ -12,6 +12,13 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.math.Fraction;
+import org.apache.commons.lang3.math.IEEE754rUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
 /**
@@ -168,4 +175,31 @@ public class FinancialCalTest {
       }
    }
 
+   
+   @Test
+   public void obtenerMaximo() {
+      double[] testVector = {1.0,2.0,3.0,3.1};
+      boolean[] booleanVector = {true,false,true};
+      System.out.println("Maximo:"+IEEE754rUtils.max(testVector));
+      System.out.println("Un cuarto "+ Fraction.ONE_QUARTER);
+      System.out.println("Un cuarto por un cuarto "+ Fraction.ONE_QUARTER.multiplyBy(Fraction.ONE_QUARTER));
+      System.out.println("Suma de fraccion 3/9 + 2/3 ="+ Fraction.getFraction("3/9").add(Fraction.TWO_THIRDS).doubleValue());
+      System.out.println("Fraccion reducida "+ Fraction.getReducedFraction(3, 9));
+      System.out.println("Valida si 15230152 solo tiene digitos :"+ NumberUtils.isDigits("1520152"));
+      System.out.println("Valida si ABDD15230152 solo tiene digitos :"+ NumberUtils.isDigits("ABDD15230152"));
+      System.out.println("Valida si 15.230152 solo es un numero que se puede crear :"+ NumberUtils.isCreatable("15.230152"));
+      System.out.println("Valida si 0XABCG es un numero que se puede crear :"+ NumberUtils.isCreatable("0XABCG"));
+      System.out.println("Mostrar lista:"+ ArrayUtils.toString(testVector));
+      System.out.println("And:"+ BooleanUtils.and(booleanVector));
+      System.out.println("Or:"+ BooleanUtils.or(booleanVector));
+      
+      //Clonar objeto
+      Integer i = null;    
+      System.out.println("i defaultItNull:"+ObjectUtils.defaultIfNull(i, 40));
+      System.out.println("firstNonNull:"+ObjectUtils.firstNonNull(i,null,20));
+      
+      System.out.println("RandomStringUtils.random:"+RandomStringUtils.random(50,'a','b','c'));
+      System.out.println("RandomStringUtils.random:"+RandomStringUtils.random(20, true, true));
+      
+   }
 }
