@@ -16,10 +16,16 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.math.Fraction;
 import org.apache.commons.lang3.math.IEEE754rUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.Test;
+
+import com.jagp.builder.InfoDTO;
+import com.jagp.builder.InfoDTOBuilder;
 
 /**
  * @author jagomezp
@@ -177,7 +183,7 @@ public class FinancialCalTest {
 
    
    @Test
-   public void obtenerMaximo() {
+   public void test9() {
       double[] testVector = {1.0,2.0,3.0,3.1};
       boolean[] booleanVector = {true,false,true};
       System.out.println("Maximo:"+IEEE754rUtils.max(testVector));
@@ -200,6 +206,36 @@ public class FinancialCalTest {
       
       System.out.println("RandomStringUtils.random:"+RandomStringUtils.random(50,'a','b','c'));
       System.out.println("RandomStringUtils.random:"+RandomStringUtils.random(20, true, true));
+      
+      System.out.println("RandomStringUtils.random:"+RandomStringUtils.random(8, "colombia"));
+      System.out.println("RandomStringUtils.randomAlphabetic:"+RandomStringUtils.randomAlphabetic(35));
+      System.out.println("RandomStringUtils.randomAscii:"+RandomStringUtils.randomAscii(100));
+      System.out.println("RandomStringUtils.randomGraph:"+RandomStringUtils.randomGraph(100));
+      System.out.println("RandomStringUtils.randomPrint:"+RandomStringUtils.randomPrint(100));
+      
+      System.out.println(".randomPrint:"+RandomStringUtils.randomPrint(100));
+      System.out.println("StringUtils.join  "+StringUtils.join(testVector, '-'));
+      System.out.println("normalizeSpace  "+StringUtils.normalizeSpace("uno dos  tres   cuatro    cinco."));
+      
+   }
+   
+   
+   @Test
+   public void test10() {
+      InfoDTO info = new InfoDTOBuilder()
+                        .attribute1("Uno")
+                        .attribute2("dos")
+                        .build();
+      System.out.println("info att1:"+info.getAttribute1());
+      System.out.println("info att2:"+info.getAttribute2());
+      
+      //DateUtil
+      System.out.println("Date format:"+DateFormatUtils.format(Calendar.getInstance(),DateFormatUtils.ISO_8601_EXTENDED_DATE_FORMAT.getPattern()));
+      
+      System.out.println("Date format:"+DateFormatUtils.format(Calendar.getInstance(),DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.getPattern()));
+      
+      System.out.println(info);
+      System.out.println(ToStringBuilder.reflectionToString(info));
       
    }
 }
