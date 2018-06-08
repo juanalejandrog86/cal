@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -129,7 +131,6 @@ public class FinancialCalTest {
    }
    
    
-   
    @Test
    public void test7(){
       
@@ -147,6 +148,7 @@ public class FinancialCalTest {
       cal.set(Calendar.MINUTE,0);
       cal.set(Calendar.SECOND,0);
       cal.set(Calendar.MILLISECOND,0);
+      cal.add(Calendar.DAY_OF_MONTH, -1);
       
       Date dateBefore = cal.getTime(); 
       
@@ -237,5 +239,26 @@ public class FinancialCalTest {
       System.out.println(info);
       System.out.println(ToStringBuilder.reflectionToString(info));
       
+   }
+   
+   @Test
+   public void test11(){
+      Map<String,String> mapa = new HashMap<String, String>();
+      System.out.println("Valor retornado "+mapa.get("dos"));
+   }
+   
+   
+   
+   @Test
+   public void test12(){
+      StringBuilder s = new StringBuilder();
+      System.out.println(s.toString().substring(0,s.length()-2));
+      
+   }
+   
+   @Test
+   public void test13(){
+      StringBuilder s = new StringBuilder(null);
+      System.out.println(s.toString().equals("null"));
    }
 }
