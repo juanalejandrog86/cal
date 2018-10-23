@@ -5,12 +5,19 @@ package com.jagp.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -258,7 +265,99 @@ public class FinancialCalTest {
    
    @Test
    public void test13(){
+      
       StringBuilder s = new StringBuilder(null);
       System.out.println(s.toString().equals("null"));
+   }
+   
+   
+   
+   
+   
+   
+   @Test
+   public void test14(){
+      String initBalance = "null";
+      System.out.println("Resultado de prueba initBalance ->"+(StringUtils.isNotBlank(initBalance) && !"null".equals(initBalance)));
+   }
+   
+   @Test
+   public void test15(){
+      Map<String, String> parameterMap = new LinkedHashMap<String, String>(); 
+      parameterMap.put("service_type","ServAvailInvCrit3");
+      parameterMap.put("type", "getArticleDistributor");
+      parameterMap.put("idCity","2");
+      parameterMap.put("idDistributor","3");
+      parameterMap.put("plu",null);
+      parameterMap.put("serial","4");
+      parameterMap.put("idPdv","null");
+      parameterMap.put("codigoSAPpdv","6");
+      
+      String cadenaGenerada = getInfoAvailableInvKeyValueString(parameterMap);
+      System.out.println("->>>>>>>>>"+cadenaGenerada);
+   }
+   
+   /** Req 146777
+    * Se encarga de formar una cadena clave valor para el consumo del servicio rest   
+    * @return
+    */
+   private String getInfoAvailableInvKeyValueString(Map<String,String> map){
+     StringBuilder keyValueBuilder;
+      List<String> list = new ArrayList<String>();
+      //Se valida que el mapa no este vacio
+      if(map!=null && !map.isEmpty()){
+         //Se recorre el mapa para formar la cadena
+         for(Entry<String,String> entry:map.entrySet()){
+            //Solo se agregan a la cadena los parametros que no sean vacios
+            if(StringUtils.isNotBlank(entry.getValue()) && !"null".equals(entry.getValue())){
+               keyValueBuilder = new StringBuilder();
+               keyValueBuilder.append("{\"@value\":\"").append(entry.getValue()).append("\",\"@name\":\"").append(entry.getKey()).append("\"}");
+               list.add(keyValueBuilder.toString());
+            }
+         }
+      }
+      // Se retornan los elementos de list como una cadena separada por comas
+      return StringUtils.join(list.toArray(),",");
+   }
+   
+   
+   @Test
+   public void test16(){
+     String  numeroB=Integer.toBinaryString(32);
+     Integer maxLonguitud = 0;
+     System.out.println("numeroB="+numeroB);
+     /*//Se eliminan ceros del inicio
+     if(numeroB.startsWith("0")){
+        numeroB =numeroB.substring(numeroB.indexOf("1")); 
+     }*/
+     //Se eliminan numeros de la cola
+     if(numeroB.endsWith("0")){
+        numeroB =numeroB.substring(0,numeroB.lastIndexOf("1"));
+     }
+     System.out.println("numeroB sin ceros finales ="+numeroB);
+     String[] cadenas=numeroB.split("1");
+     for(int i=0;i<cadenas.length;i++){
+        if(cadenas[i].length()>maxLonguitud){
+           maxLonguitud=cadenas[i].length();
+        }
+     }
+     System.out.println("Maxima longitud="+maxLonguitud);
+   }
+   
+   @Test
+   public void testDecimal(){
+      
+      Locale locale = new Locale("en", "UK"); 
+
+      String pattern = "###,###.###";
+      DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+      symbols.setDecimalSeparator('.');
+      symbols.setGroupingSeparator('.');
+
+      DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+      
+      BigDecimal patrimonio = new BigDecimal("1900123");
+      
+      System.out.println("Valor con formato"+decimalFormat.format(patrimonio));
    }
 }
