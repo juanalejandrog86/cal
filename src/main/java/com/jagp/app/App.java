@@ -13,6 +13,9 @@ public class App
        java.lang.Double numero = new Double(1);
        
        System.out.println( "this is a sample test" );
+       Person person = new Person();
+       person.setName("Luis Perez");
+       System.out.println(person.getName());
        newText();
     }
 
