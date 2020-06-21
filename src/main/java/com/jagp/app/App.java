@@ -14,6 +14,7 @@ public class App
        
        System.out.println( "this is a sample test" );
        Person person = new Person();
+       
        person.setName("Luis Perez");
        System.out.println(person.getName());
        newText();
@@ -21,7 +22,7 @@ public class App
 
     private static String newText(){
 	for(int i=20; i<40;i++){    
-    	        System.out.println("Totalmente mucho mas rápido de hacer");
+    	        System.out.println("cambio de mensaje para realizar nueva prueba");
 	}
 	return null;
     }
