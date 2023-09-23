@@ -259,22 +259,11 @@ public class FinancialCalTest {
    @Test
    public void test12(){
       StringBuilder s = new StringBuilder();
+      s.append("Cadena a dividir");
       System.out.println(s.toString().substring(0,s.length()-2));
       
    }
-   
-   @Test
-   public void test13(){
-      
-      StringBuilder s = new StringBuilder(null);
-      System.out.println(s.toString().equals("null"));
-   }
-   
-   
-   
-   
-   
-   
+     
    @Test
    public void test14(){
       String initBalance = "null";
